@@ -11,12 +11,18 @@ const Results = () => {
     const toast=useToast();
       const res=async()=>{
         const result=await axios.get('http://127.0.0.1:5000/crack');
+        
         console.log(result);
         const data = result.data; 
-    const base64String = data.Image;
-    const image = new Image();
-    image.src = `data:image/png;base64, ${base64String}`;
-    document.body.appendChild(image);
+        const base64String = data.Image;
+        const image = new Image();
+        image.src = `data:image/png;base64, ${base64String}`;
+        image.width = 400; // Set your desired width
+        image.height = 300;
+        image.style.paddingTop = '20px';
+        image.style.display = 'block';
+        image.style.margin = 'auto';
+        document.body.appendChild(image);
       }  
     const signout=async()=>{
         await firebase.signout();
@@ -36,16 +42,17 @@ const Results = () => {
         <HStack backgroundColor={'black'} 
         maxW={'full'} border={'1px'} padding={'4'}>
         <Heading paddingLeft={'2'} 
-        color={'white'}>Crack Detective</Heading>
+        color={'white'}>Crack Detection</Heading>
         <HStack paddingLeft={['900px']}>
         {/* <Button>View History</Button> */}
-        <Button onClick={signout}>Sign Out</Button>
+        {/* <Button marginLeft={['200px']} onClick={signout} >Sign Out</Button> */}
         </HStack>
         </HStack>
     </nav>
     <VStack>
       <Text>Results are ready !! Click to view</Text>
-      <Button onClick={res}>Get Results</Button>
+      <Button onClick={res} color="white" bg="black" css={{"&:hover":{transform:"scale(1.1)"}}} _hover={{ bg: 'black' }}  transition="all 0.3s ease" boxShadow="0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)" >Get Results</Button>
+      
     </VStack>
     </>
   )

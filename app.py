@@ -1,3 +1,4 @@
+import os
 from flask import Flask,request,redirect,session,jsonify
 from pymongo import MongoClient
 from flask_cors import CORS
@@ -15,6 +16,7 @@ db=mongo.get_database('users')
 CORS(app)
 
 
+    
 @app.route('/create',methods=["POST"])
 def dbase():
     body=request.json
@@ -27,7 +29,7 @@ def crk():
     if request.method=='POST':
         img=request.files['image']
         name=img.filename
-        path='E:/hack/images/'+name
+        path='D:/crack_detective/images/'+name
         img.save(path)
         print(path)
         return redirect('http://localhost:3000/results')
@@ -49,7 +51,7 @@ def meas():
     if(request.method=='POST'):
         img=request.files['image']
         name=img.filename
-        pth='E:/hack/object/'+name
+        pth='D:/crack_detective/object/'+name
         img.save(pth)
         print(pth)
         return redirect('http://localhost:3000/object')
@@ -63,6 +65,8 @@ def meas():
         return jsonify({
             "Image":image_base64
         })
+
+
 
 @app.route('/live',methods=['GET'])
 def scan():
